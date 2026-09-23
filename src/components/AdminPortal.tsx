@@ -29,7 +29,7 @@ export const AdminPortal: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-extrabold text-slate-900">Trust & Safety — Admin Portal</h1>
-          <p className="text-sm text-slate-500 mt-0.5">Setu platform moderation and escrow management console.</p>
+          <p className="text-sm text-slate-600 font-medium mt-0.5">Setu platform moderation and escrow management console.</p>
         </div>
         <div className="flex items-center space-x-2">
           <span className="badge badge-blue">Admin Access</span>
@@ -41,8 +41,8 @@ export const AdminPortal: React.FC = () => {
       <div className="flex items-center gap-2 overflow-x-auto no-scrollbar bg-white border border-slate-200 rounded-2xl p-2 shadow-card">
         {tabs.map(({ key, label, icon: Icon }) => (
           <button key={key} onClick={() => setActiveSection(key as any)}
-            className={`flex items-center space-x-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${
-              activeSection === key ? 'bg-blue-700 text-white shadow-blue-sm' : 'text-slate-500 hover:text-blue-700 hover:bg-blue-50'
+            className={`flex items-center space-x-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition-all whitespace-nowrap ${
+              activeSection === key ? 'bg-blue-700 text-white shadow-blue-sm' : 'text-slate-600 hover:text-blue-700 hover:bg-blue-50'
             }`}>
             <Icon className="w-4 h-4" />
             <span>{label}</span>
@@ -65,33 +65,33 @@ export const AdminPortal: React.FC = () => {
                   <Icon className={`w-5 h-5 ${color}`} />
                 </div>
                 <div className={`text-2xl font-black ${color}`}>{value}</div>
-                <div className="text-xs text-slate-500 mt-0.5">{label}</div>
+                <div className="text-xs text-slate-600 font-semibold mt-0.5">{label}</div>
               </div>
             ))}
           </div>
 
           {/* Escrow Summary */}
-          <div className="bg-gradient-to-r from-blue-700 to-blue-900 rounded-3xl p-6 text-white grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <div className="bg-gradient-to-r from-blue-800 to-blue-950 rounded-3xl p-6 text-white grid grid-cols-1 sm:grid-cols-3 gap-5 shadow-blue-md">
             {[
-              { label: 'Active Escrow (Locked)', value: `₹${totalEscrowed.toLocaleString('en-IN')}`, color: 'text-sky-200' },
+              { label: 'Active Escrow (Locked)', value: `₹${totalEscrowed.toLocaleString('en-IN')}`, color: 'text-sky-300' },
               { label: 'Escrow Released (All Time)', value: `₹${escrowTransactions.filter(t => t.type === 'Release').reduce((a, t) => a + t.winnerPayout, 0).toLocaleString('en-IN')}`, color: 'text-green-300' },
-              { label: 'Platform Revenue (Fees)', value: `₹${escrowTransactions.filter(t => t.type === 'Release').reduce((a, t) => a + t.platformFee, 0).toLocaleString('en-IN')}`, color: 'text-blue-200' },
+              { label: 'Platform Revenue (Fees)', value: `₹${escrowTransactions.filter(t => t.type === 'Release').reduce((a, t) => a + t.platformFee, 0).toLocaleString('en-IN')}`, color: 'text-sky-200' },
             ].map(({ label, value, color }) => (
-              <div key={label} className="border border-white/15 rounded-2xl p-4 bg-white/10">
+              <div key={label} className="border border-white/20 rounded-2xl p-4 bg-white/10 backdrop-blur-sm">
                 <div className={`text-xl font-black font-mono ${color}`}>{value}</div>
-                <div className="text-xs text-blue-200 mt-1">{label}</div>
+                <div className="text-xs text-sky-100 font-medium mt-1">{label}</div>
               </div>
             ))}
           </div>
 
           {/* Active Challenges Table */}
           <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-card">
-            <div className="px-6 py-4 border-b border-slate-100">
+            <div className="px-6 py-4 border-b border-slate-200 bg-slate-50/70">
               <h2 className="font-bold text-slate-900 text-sm">All Challenges — Status Overview</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-left">
-                <thead className="bg-slate-50 border-b border-slate-100 text-[11px] uppercase tracking-widest text-slate-400 font-bold">
+                <thead className="bg-slate-50 border-b border-slate-200 text-xs uppercase tracking-widest text-slate-600 font-bold">
                   <tr>
                     <th className="px-5 py-4">Challenge</th>
                     <th className="px-5 py-4">Poster</th>
@@ -104,8 +104,8 @@ export const AdminPortal: React.FC = () => {
                 <tbody className="divide-y divide-slate-100">
                   {challenges.map(ch => (
                     <tr key={ch.id} className="hover:bg-slate-50 transition-colors">
-                      <td className="px-5 py-4 font-medium text-slate-900 max-w-xs truncate">{ch.title}</td>
-                      <td className="px-5 py-4 text-xs text-slate-500">{ch.posterName}</td>
+                      <td className="px-5 py-4 font-semibold text-slate-900 max-w-xs truncate">{ch.title}</td>
+                      <td className="px-5 py-4 text-xs text-slate-700 font-medium">{ch.posterName}</td>
                       <td className="px-5 py-4">
                         <span className={`badge ${ch.track === 'Public' ? 'badge-blue' : 'badge-purple'}`}>
                           {ch.track}
@@ -119,7 +119,7 @@ export const AdminPortal: React.FC = () => {
                           ch.status === 'In Progress' ? 'badge-blue'  : 'badge-amber'
                         }`}>{ch.status}</span>
                       </td>
-                      <td className="px-5 py-4 text-center text-slate-600 font-mono text-xs">
+                      <td className="px-5 py-4 text-center text-slate-800 font-mono text-xs font-bold">
                         {ch.teamsCount}/{ch.maxTeams}
                       </td>
                     </tr>
@@ -137,8 +137,8 @@ export const AdminPortal: React.FC = () => {
           <h2 className="font-bold text-slate-900">Plagiarism / Similarity Flags</h2>
           {flagged.length === 0 ? (
             <div className="py-16 text-center bg-slate-50 rounded-2xl border border-slate-200">
-              <CheckCircle2 className="w-10 h-10 text-green-400 mx-auto mb-3" />
-              <p className="text-slate-500 text-sm">All submissions pass originality checks. No flags raised.</p>
+              <CheckCircle2 className="w-10 h-10 text-green-500 mx-auto mb-3" />
+              <p className="text-slate-600 font-medium text-sm">All submissions pass originality checks. No flags raised.</p>
             </div>
           ) : (
             flagged.map(sub => (

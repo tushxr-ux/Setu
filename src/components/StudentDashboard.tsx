@@ -33,7 +33,7 @@ export const StudentDashboard: React.FC = () => {
                   <h1 className="text-xl font-extrabold text-slate-900">{currentUser.name}</h1>
                   <span className="badge badge-blue">Verified</span>
                 </div>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-slate-700 font-medium mt-1">
                   {currentUser.college} • Class of {currentUser.graduationYear} •{' '}
                   <span className="text-blue-700 font-bold">★ {currentUser.rating} Rating</span>
                 </p>
@@ -56,10 +56,10 @@ export const StudentDashboard: React.FC = () => {
 
           {/* Skills */}
           <div className="mt-5 pt-5 border-t border-slate-100">
-            <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Skills</div>
+            <div className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Skills</div>
             <div className="flex flex-wrap gap-1.5">
               {currentUser.skills?.map(skill => (
-                <span key={skill} className="text-xs px-2.5 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-full font-medium">{skill}</span>
+                <span key={skill} className="text-xs px-2.5 py-1 bg-blue-50 text-blue-800 border border-blue-200 rounded-full font-semibold">{skill}</span>
               ))}
             </div>
           </div>
@@ -69,22 +69,22 @@ export const StudentDashboard: React.FC = () => {
         <div className="lg:col-span-4 bg-gradient-to-br from-blue-700 to-blue-900 rounded-3xl p-6 text-white shadow-blue-lg flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-xs text-blue-200 font-semibold uppercase tracking-wider flex items-center space-x-1.5">
+              <span className="text-xs text-sky-200 font-bold uppercase tracking-wider flex items-center space-x-1.5">
                 <Wallet className="w-4 h-4 text-sky-300" />
                 <span>Solver Wallet</span>
               </span>
-              <span className="text-[10px] bg-white/15 text-sky-100 px-2 py-0.5 rounded-full font-bold">Instant UPI</span>
+              <span className="text-[10px] bg-white/20 text-white px-2.5 py-0.5 rounded-full font-bold">Instant UPI</span>
             </div>
             <div className="text-3xl font-black mt-3 font-mono">
               ₹{(currentUser.walletBalance || 0).toLocaleString('en-IN')}
             </div>
-            <p className="text-xs text-blue-200 mt-1">
+            <p className="text-xs text-sky-100 mt-1">
               Total earned: <span className="text-white font-bold">₹{(currentUser.totalEarned || 0).toLocaleString('en-IN')}</span> across {currentUser.solvedCount} challenges
             </p>
           </div>
           <button
             onClick={() => setIsWithdrawOpen(true)}
-            className="mt-6 w-full py-3 bg-white text-blue-800 font-bold text-sm rounded-xl hover:bg-blue-50 active:scale-95 transition-all shadow-sm flex items-center justify-center space-x-2"
+            className="mt-6 w-full py-3 bg-white text-blue-900 font-bold text-sm rounded-xl hover:bg-blue-50 active:scale-95 transition-all shadow-sm flex items-center justify-center space-x-2"
           >
             <ArrowDownRight className="w-4 h-4" />
             <span>Withdraw to UPI / Bank</span>
@@ -98,7 +98,7 @@ export const StudentDashboard: React.FC = () => {
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-lg font-extrabold text-slate-900">My Submissions</h2>
-            <p className="text-xs text-slate-500 mt-0.5">Track reviews, payouts, and feedback for each solution submitted.</p>
+            <p className="text-xs text-slate-600 font-medium mt-0.5">Track reviews, payouts, and feedback for each solution submitted.</p>
           </div>
           <button onClick={() => setActiveTab('explore')} className="btn-secondary text-xs">
             Browse Challenges <ExternalLink className="w-3.5 h-3.5" />
@@ -107,7 +107,7 @@ export const StudentDashboard: React.FC = () => {
 
         {mySubmissions.length === 0 ? (
           <div className="py-16 text-center bg-slate-50 rounded-2xl border border-slate-200">
-            <p className="text-slate-400 text-sm">No solutions submitted yet.</p>
+            <p className="text-slate-600 text-sm font-medium">No solutions submitted yet.</p>
             <button onClick={() => setActiveTab('explore')} className="mt-3 btn-primary text-sm">Browse Open Challenges</button>
           </div>
         ) : (
@@ -119,15 +119,15 @@ export const StudentDashboard: React.FC = () => {
                 <div key={sub.id} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center space-x-2 mb-1">
-                      <span className="badge badge-blue font-mono">₹{winnerPayout.toLocaleString('en-IN')} winner</span>
-                      <span className="text-xs text-slate-400">{new Date(sub.submittedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</span>
+                      <span className="badge badge-blue font-mono font-bold">₹{winnerPayout.toLocaleString('en-IN')} winner</span>
+                      <span className="text-xs text-slate-600 font-medium">{new Date(sub.submittedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</span>
                     </div>
                     <h3 className="text-sm font-bold text-slate-900 line-clamp-1">{sub.challengeTitle}</h3>
-                    <div className="text-xs text-slate-500 mt-0.5">Team: {sub.teamName} • {sub.memberCount} member{sub.memberCount > 1 ? 's' : ''}</div>
+                    <div className="text-xs text-slate-600 font-medium mt-0.5">Team: {sub.teamName} • {sub.memberCount} member{sub.memberCount > 1 ? 's' : ''}</div>
                   </div>
                   <div className="flex items-center gap-3 pt-3 md:pt-0 border-t md:border-t-0 border-slate-100 shrink-0">
                     <div className="text-right">
-                      <div className="text-[10px] text-slate-400 uppercase">Originality</div>
+                      <div className="text-[11px] text-slate-600 font-bold uppercase">Originality</div>
                       <div className={`text-xs font-mono font-bold ${sub.plagiarismFlagged ? 'text-red-600' : 'text-green-600'}`}>
                         {sub.plagiarismScore}%
                       </div>
@@ -139,7 +139,7 @@ export const StudentDashboard: React.FC = () => {
                       'badge-amber'
                     }`}>{sub.status}</span>
                     {sub.feedback && (
-                      <div className="max-w-xs text-xs text-slate-500 italic hidden lg:block line-clamp-2">
+                      <div className="max-w-xs text-xs text-slate-700 italic hidden lg:block line-clamp-2">
                         "{sub.feedback}"
                       </div>
                     )}
@@ -159,12 +159,12 @@ export const StudentDashboard: React.FC = () => {
               <div className="p-2.5 rounded-xl bg-blue-50 text-blue-700"><Wallet className="w-5 h-5" /></div>
               <div>
                 <h3 className="font-bold text-slate-900">Withdraw Earnings</h3>
-                <p className="text-xs text-slate-400">Instant transfer via NPCI UPI / IMPS</p>
+                <p className="text-xs text-slate-600 font-medium">Instant transfer via NPCI UPI / IMPS</p>
               </div>
             </div>
             <form onSubmit={handleWithdraw} className="space-y-3">
               <div>
-                <div className="flex justify-between text-xs text-slate-500 mb-1">
+                <div className="flex justify-between text-xs text-slate-700 font-medium mb-1">
                   <span>Amount (₹)</span>
                   <span>Available: ₹{(currentUser.walletBalance || 0).toLocaleString('en-IN')}</span>
                 </div>
@@ -173,10 +173,10 @@ export const StudentDashboard: React.FC = () => {
                   className="form-input font-mono font-bold text-blue-700" />
               </div>
               <div>
-                <label className="block text-xs text-slate-500 mb-1">UPI ID / Account Number</label>
+                <label className="block text-xs text-slate-700 font-semibold mb-1">UPI ID / Account Number</label>
                 <input value={upiId} onChange={e => setUpiId(e.target.value)} required className="form-input font-mono text-sm" placeholder="name@upi" />
               </div>
-              <div className="p-3 bg-green-50 border border-green-200 rounded-xl text-xs text-green-700">
+              <div className="p-3 bg-green-50 border border-green-200 rounded-xl text-xs text-green-800 font-medium">
                 ✓ 0% withdrawal fee • Instant NPCI settlement within 15 minutes
               </div>
               <div className="flex justify-end space-x-2 pt-1">

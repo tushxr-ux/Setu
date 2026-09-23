@@ -54,28 +54,32 @@
   @apply inline-flex items-center space-x-1 text-xs font-semibold px-2.5 py-1 rounded-full;
 }
 
-.badge-blue   { @apply badge bg-blue-100 text-blue-800 border border-blue-200; }
-.badge-sky    { @apply badge bg-sky-100  text-sky-800  border border-sky-200; }
-.badge-navy   { @apply badge bg-blue-950/10 text-blue-900 border border-blue-900/20; }
-.badge-green  { @apply badge bg-green-50  text-green-700 border border-green-200; }
-.badge-amber  { @apply badge bg-amber-50  text-amber-700 border border-amber-200; }
-.badge-red    { @apply badge bg-red-50    text-red-700   border border-red-200; }
-.badge-purple { @apply badge bg-purple-50 text-purple-700 border border-purple-200; }
-.badge-slate  { @apply badge bg-slate-100 text-slate-600 border border-slate-200; }
+.badge-blue   { @apply badge bg-blue-100 text-blue-900 border border-blue-200; }
+.badge-sky    { @apply badge bg-sky-100  text-sky-900  border border-sky-200; }
+.badge-navy   { @apply badge bg-blue-950/15 text-blue-950 border border-blue-900/25; }
+.badge-green  { @apply badge bg-green-50  text-green-800 border border-green-200; }
+.badge-amber  { @apply badge bg-amber-50  text-amber-800 border border-amber-200; }
+.badge-red    { @apply badge bg-red-50    text-red-800   border border-red-200; }
+.badge-purple { @apply badge bg-purple-50 text-purple-800 border border-purple-200; }
+.badge-slate  { @apply badge bg-slate-100 text-slate-700 border border-slate-300; }
 
 /* ====================== PAGE BACKGROUNDS ====================== */
 .page-bg {
   @apply min-h-screen bg-slate-50;
 }
 
-/* Hero gradient stripe */
+/* Hero gradient stripe with embedded pattern so it never gets erased */
 .hero-gradient {
-  background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #0ea5e9 100%);
+  background-color: #0f172a;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.12) 1px, transparent 0),
+    linear-gradient(135deg, #09132b 0%, #1e3a8a 40%, #1d4ed8 75%, #0284c7 100%);
+  background-size: 28px 28px, 100% 100%;
 }
 
 .hero-pattern {
-  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0);
-  background-size: 28px 28px;
+  /* Retained for backward compat, does not erase background-color/gradient */
+  background-color: transparent;
 }
 
 /* ====================== SECTION SEPARATORS ====================== */
@@ -83,7 +87,7 @@
   @apply text-2xl font-extrabold text-slate-900 tracking-tight;
 }
 .section-subtitle {
-  @apply text-sm text-slate-500 mt-1;
+  @apply text-sm text-slate-600 font-medium mt-1;
 }
 
 /* ====================== ACTIVE TAB INDICATOR ====================== */
@@ -96,7 +100,7 @@
 
 /* ====================== FORM INPUTS ====================== */
 .form-input {
-  @apply w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all;
+  @apply w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm text-slate-900 placeholder-slate-500 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-normal;
 }
 
 .form-textarea {
@@ -104,7 +108,7 @@
 }
 
 .form-select {
-  @apply form-input appearance-none;
+  @apply form-input appearance-none bg-white text-slate-800;
 }
 
 /* ====================== MODAL OVERLAY ====================== */

@@ -134,7 +134,7 @@ export default function App() {
                       {step}
                     </div>
                     <h4 className="text-sm font-extrabold text-slate-900 mb-2">{title}</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed">{body}</p>
+                    <p className="text-xs text-slate-600 leading-relaxed font-medium">{body}</p>
                   </div>
                 ))}
               </div>
@@ -175,17 +175,17 @@ export default function App() {
 
       {/* Footer */}
       <footer className="mt-16 border-t border-slate-200 bg-white py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-600 font-medium">
           <div>
-            <span className="font-extrabold text-slate-700 text-sm">Setu</span>
-            <span className="ml-1">— Bridging Civic Problems to Student Solutions</span>
+            <span className="font-extrabold text-slate-900 text-sm">Setu</span>
+            <span className="ml-1.5 text-slate-600">— Bridging Civic Problems to Student Solutions</span>
           </div>
           <div className="flex items-center space-x-4">
-            <span>SIH 2026 · PS26043</span>
+            <span className="font-semibold text-slate-700">SIH 2026 · PS26043</span>
             <span>·</span>
             <span>Built with ❤️ for India</span>
             <span>·</span>
-            <span>100% Escrow-Backed</span>
+            <span className="text-blue-700 font-bold">100% Escrow-Backed</span>
           </div>
         </div>
       </footer>

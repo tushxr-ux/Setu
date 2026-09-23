@@ -34,7 +34,7 @@ export const ChallengeDetailModal: React.FC<ChallengeDetailModalProps> = ({ chal
             </div>
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-1">
-                <span className="flex items-center space-x-1 text-xs text-slate-500 font-medium">
+                <span className="flex items-center space-x-1 text-xs text-slate-700 font-semibold">
                   <PosterIcon className="w-3.5 h-3.5" />
                   <span>{ch.posterName}</span>
                 </span>
@@ -43,7 +43,7 @@ export const ChallengeDetailModal: React.FC<ChallengeDetailModalProps> = ({ chal
                 }`}>
                   {ch.track === 'Public' ? '🏛 Government / NGO' : '🏢 Private Sector'}
                 </span>
-                <span className="text-xs text-slate-400 flex items-center space-x-1">
+                <span className="text-xs text-slate-600 font-medium flex items-center space-x-1">
                   <Clock className="w-3.5 h-3.5" />
                   <span>{daysLeft > 0 ? `${daysLeft} days left` : 'Deadline passed'}</span>
                 </span>
@@ -51,7 +51,7 @@ export const ChallengeDetailModal: React.FC<ChallengeDetailModalProps> = ({ chal
               <h2 className="text-xl font-extrabold text-slate-900 leading-snug">{ch.title}</h2>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors shrink-0">
+          <button onClick={onClose} className="p-2 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors shrink-0">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -67,8 +67,8 @@ export const ChallengeDetailModal: React.FC<ChallengeDetailModalProps> = ({ chal
               </div>
               <div>
                 <div className="font-bold text-sky-100 text-sm">Escrow-Backed Reward — Verified Funded</div>
-                <div className="text-xs text-blue-200 mt-0.5 font-mono">{ch.escrowTxnId}</div>
-                <div className="text-xs text-blue-200 mt-1">
+                <div className="text-xs text-sky-200 mt-0.5 font-mono">{ch.escrowTxnId}</div>
+                <div className="text-xs text-blue-100 mt-1">
                   Reward is locked before any team starts. Released automatically upon acceptance.
                 </div>
               </div>
@@ -78,7 +78,7 @@ export const ChallengeDetailModal: React.FC<ChallengeDetailModalProps> = ({ chal
               <div className="text-3xl font-black font-mono text-white">
                 ₹{ch.rewardAmount.toLocaleString('en-IN')}
               </div>
-              <div className="text-xs text-blue-200 mt-1 space-y-0.5">
+              <div className="text-xs text-sky-100 mt-1 space-y-0.5">
                 <div>Winner (70%): <span className="text-white font-bold">₹{winnerPayout.toLocaleString('en-IN')}</span></div>
                 <div>Other finishers (30%): <span className="text-white font-bold">₹{othersPayout.toLocaleString('en-IN')}</span></div>
                 {ch.track === 'Private' && <div>Platform fee (7%): ₹{platformFee.toLocaleString('en-IN')}</div>}
@@ -88,9 +88,9 @@ export const ChallengeDetailModal: React.FC<ChallengeDetailModalProps> = ({ chal
 
           {/* Fairness Notice for Private */}
           {ch.track === 'Private' && (
-            <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-800 space-y-1">
-              <div className="font-bold text-amber-900 flex items-center space-x-1.5"><AlertCircle className="w-4 h-4" /><span>Private-Sector Fairness Safeguards (Setu Rules)</span></div>
-              <ul className="list-disc pl-5 space-y-0.5 text-amber-700">
+            <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-1">
+              <div className="font-bold text-amber-950 flex items-center space-x-1.5"><AlertCircle className="w-4 h-4 text-amber-700" /><span>Private-Sector Fairness Safeguards (Setu Rules)</span></div>
+              <ul className="list-disc pl-5 space-y-0.5 text-amber-800 font-medium">
                 <li>Only the winning team's IP transfers to the company — every other team retains full ownership.</li>
                 <li>Every team that submits a complete judged solution earns a guaranteed share of the reward pool (30% split).</li>
                 <li>Scope is capped to a bounded prototype — no attempt to get a full production product built for free.</li>
@@ -101,8 +101,8 @@ export const ChallengeDetailModal: React.FC<ChallengeDetailModalProps> = ({ chal
           {/* Problem Statement */}
           {ch.problemStatement && (
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Problem Background</h3>
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 text-sm text-slate-700 leading-relaxed">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Problem Background</h3>
+              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 leading-relaxed font-normal">
                 {ch.problemStatement}
               </div>
             </div>
@@ -110,21 +110,21 @@ export const ChallengeDetailModal: React.FC<ChallengeDetailModalProps> = ({ chal
 
           {/* Description */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Full Challenge Brief</h3>
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 text-sm text-slate-700 leading-relaxed whitespace-pre-line">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Full Challenge Brief</h3>
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 leading-relaxed whitespace-pre-line font-normal">
               {ch.description}
             </div>
           </div>
 
           {/* Acceptance Criteria */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center space-x-2">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 flex items-center space-x-2">
               <CheckCircle className="w-4 h-4 text-blue-600" />
               <span>Acceptance Criteria</span>
             </h3>
             <ul className="space-y-2">
               {ch.acceptanceCriteria.map((item, idx) => (
-                <li key={idx} className="flex items-start space-x-3 p-3 rounded-xl bg-white border border-slate-100 shadow-sm text-sm text-slate-700">
+                <li key={idx} className="flex items-start space-x-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm text-sm text-slate-800 font-medium">
                   <span className="w-6 h-6 rounded-full bg-blue-700 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">{idx + 1}</span>
                   <span>{item}</span>
                 </li>
@@ -135,17 +135,17 @@ export const ChallengeDetailModal: React.FC<ChallengeDetailModalProps> = ({ chal
           {/* Expected Outcome */}
           {ch.expectedOutcome && (
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Expected Impact</h3>
-              <div className="p-4 rounded-xl bg-blue-50 border border-blue-100 text-sm text-blue-800 leading-relaxed">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Expected Impact</h3>
+              <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 text-sm text-blue-900 leading-relaxed font-medium">
                 🎯 {ch.expectedOutcome}
               </div>
             </div>
           )}
 
           {/* Location */}
-          <div className="flex items-center space-x-2 text-xs text-slate-500 bg-slate-50 border border-slate-100 rounded-xl p-3">
-            <span className="font-semibold">Location Scope:</span>
-            <span className={`font-bold ${ch.locationScope === 'National' ? 'text-blue-700' : 'text-slate-700'}`}>
+          <div className="flex items-center space-x-2 text-xs text-slate-700 bg-slate-50 border border-slate-200 rounded-xl p-3 font-medium">
+            <span className="font-bold">Location Scope:</span>
+            <span className={`font-bold ${ch.locationScope === 'National' ? 'text-blue-700' : 'text-slate-800'}`}>
               {ch.locationScope === 'National' ? '🌐 National (Open to All India)' : `📍 ${ch.locationState} Only`}
             </span>
           </div>
@@ -153,28 +153,28 @@ export const ChallengeDetailModal: React.FC<ChallengeDetailModalProps> = ({ chal
           {/* Submissions */}
           <div className="pt-2 border-t border-slate-100">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
                 Submissions ({chSubmissions.length})
               </h3>
               {(role === 'company' || role === 'government') && (
-                <button onClick={() => { onClose(); setActiveTab('org-dashboard'); }} className="text-xs text-blue-600 hover:underline flex items-center space-x-1">
+                <button onClick={() => { onClose(); setActiveTab('org-dashboard'); }} className="text-xs text-blue-700 font-semibold hover:underline flex items-center space-x-1">
                   <span>Review Inbox</span><ExternalLink className="w-3 h-3" />
                 </button>
               )}
             </div>
             {chSubmissions.length === 0 ? (
-              <p className="text-xs text-slate-400 italic py-4 text-center bg-slate-50 rounded-xl">
+              <p className="text-xs text-slate-500 font-medium italic py-4 text-center bg-slate-50 rounded-xl border border-slate-200">
                 No solutions submitted yet. Be the first team to claim this challenge!
               </p>
             ) : (
               <div className="space-y-2">
                 {chSubmissions.map(sub => (
-                  <div key={sub.id} className="p-3 rounded-xl border border-slate-100 bg-white flex items-center justify-between text-xs shadow-sm">
+                  <div key={sub.id} className="p-3 rounded-xl border border-slate-200 bg-white flex items-center justify-between text-xs shadow-sm">
                     <div className="flex items-center space-x-2.5">
                       <img src={sub.leadStudentAvatar} alt={sub.leadStudentName} className="w-7 h-7 rounded-full object-cover border border-slate-200" />
                       <div>
-                        <div className="font-bold text-slate-800">{sub.teamName}</div>
-                        <div className="text-slate-400">{sub.leadStudentName} • {sub.leadStudentCollege}</div>
+                        <div className="font-bold text-slate-900">{sub.teamName}</div>
+                        <div className="text-slate-600 font-medium">{sub.leadStudentName} • {sub.leadStudentCollege}</div>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">

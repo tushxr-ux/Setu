@@ -15,7 +15,7 @@ const SetuLogo: React.FC<{ className?: string }> = ({ className = '' }) => (
       alt="Setu"
       className="h-9 w-auto object-contain"
     />
-    <div className="text-[10px] text-slate-400 leading-tight font-medium hidden sm:block">
+    <div className="text-[11px] text-slate-600 leading-tight font-semibold hidden sm:block">
       Bridging Problems to Solutions
     </div>
   </div>

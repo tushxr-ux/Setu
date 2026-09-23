@@ -27,7 +27,7 @@ export const LeaderboardView: React.FC = () => {
           <span>National Student Solver Leaderboard</span>
         </div>
         <h1 className="section-title text-2xl sm:text-3xl">Top Civic Problem Solvers</h1>
-        <p className="text-sm text-slate-500 mt-2 max-w-lg mx-auto">
+        <p className="text-sm text-slate-600 font-medium mt-2 max-w-lg mx-auto">
           Rankings are based on challenge difficulty, solution acceptance rate, code originality score, and community peer reviews.
         </p>
       </div>
@@ -35,7 +35,7 @@ export const LeaderboardView: React.FC = () => {
       {/* Search */}
       <div className="max-w-sm mx-auto">
         <div className="relative">
-          <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-500" />
           <input type="text" value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search solver or university..."
             className="form-input pl-10" />
@@ -54,19 +54,19 @@ export const LeaderboardView: React.FC = () => {
             </div>
             <img src={student.avatar} alt={student.name} className="w-16 h-16 rounded-2xl object-cover border-2 border-slate-200 mb-3 shadow-sm" />
             <div className="font-extrabold text-slate-900 text-sm">{student.name}</div>
-            <div className="text-xs text-slate-500 mt-0.5">{student.college}</div>
+            <div className="text-xs text-slate-600 font-medium mt-0.5">{student.college}</div>
             <div className="mt-3 flex items-center space-x-2">
               <span className="badge badge-blue text-xs">★ {student.rating}</span>
-              <span className="badge badge-slate text-xs">{student.solved} solved</span>
+              <span className="badge badge-slate text-xs font-semibold">{student.solved} solved</span>
             </div>
             <div className="mt-3 pt-3 border-t border-slate-100 w-full flex items-center justify-between text-xs">
-              <span className="text-slate-400">Total Earned</span>
+              <span className="text-slate-600 font-medium">Total Earned</span>
               <span className="font-bold text-blue-700 font-mono">₹{student.earned.toLocaleString('en-IN')}</span>
             </div>
             <div className="w-full flex items-center justify-between text-xs mt-1">
-              <span className="text-slate-400">Hire Offers</span>
+              <span className="text-slate-600 font-medium">Hire Offers</span>
               <span className="font-bold text-teal-600 flex items-center space-x-1">
-                <Briefcase className="w-3 h-3" /><span>{student.hireOffers}</span>
+                <Briefcase className="w-3.5 h-3.5" /><span>{student.hireOffers}</span>
               </span>
             </div>
           </div>
@@ -77,7 +77,7 @@ export const LeaderboardView: React.FC = () => {
       <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-card">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="bg-slate-50 border-b border-slate-100 text-[11px] text-slate-400 uppercase tracking-widest font-bold">
+            <thead className="bg-slate-50 border-b border-slate-200 text-xs text-slate-600 uppercase tracking-widest font-bold">
               <tr>
                 <th className="py-4 px-5">Rank</th>
                 <th className="py-4 px-5">Solver</th>
@@ -104,23 +104,23 @@ export const LeaderboardView: React.FC = () => {
                           {student.name}
                           <CheckCircle2 className="w-3.5 h-3.5 text-blue-500" />
                         </div>
-                        <div className="text-xs text-slate-400">{student.solved} challenges solved</div>
+                        <div className="text-xs text-slate-600 font-medium">{student.solved} challenges solved</div>
                       </div>
                     </div>
                   </td>
-                  <td className="py-4 px-5 text-slate-600 text-xs">{student.college}</td>
+                  <td className="py-4 px-5 text-slate-800 font-medium text-xs">{student.college}</td>
                   <td className="py-4 px-5">
                     <div className="flex flex-wrap gap-1">
                       {student.sectors?.slice(0, 2).map(s => (
-                        <span key={s} className="text-[10px] px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-100 rounded-full">{s}</span>
+                        <span key={s} className="text-[10px] px-2 py-0.5 bg-blue-50 text-blue-800 border border-blue-200 rounded-full font-semibold">{s}</span>
                       ))}
                     </div>
                   </td>
                   <td className="py-4 px-5 text-right font-bold text-blue-700 font-mono">{student.rating}</td>
                   <td className="py-4 px-5 text-right font-bold text-slate-900 font-mono">₹{student.earned.toLocaleString('en-IN')}</td>
                   <td className="py-4 px-5 text-center">
-                    <span className="badge badge-slate">
-                      <Briefcase className="w-3 h-3 text-teal-500" />
+                    <span className="badge badge-slate font-semibold">
+                      <Briefcase className="w-3 h-3 text-teal-600" />
                       {student.hireOffers}
                     </span>
                   </td>
