@@ -74,13 +74,13 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           {/* Search + Difficulty + Track Row */}
           <div className="flex flex-col sm:flex-row gap-2.5">
             <div className="relative flex-1">
-              <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-500" />
+              <Search className="absolute left-3.5 top-3.5 w-4 h-4 text-slate-500 pointer-events-none" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
                 placeholder="Search challenges by keyword, sector, skill (e.g. pothole, PWA, WhatsApp bot)..."
-                className="form-input pl-10"
+                className="form-input !pl-11"
               />
             </div>
 

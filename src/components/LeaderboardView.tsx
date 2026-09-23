@@ -35,10 +35,10 @@ export const LeaderboardView: React.FC = () => {
       {/* Search */}
       <div className="max-w-sm mx-auto">
         <div className="relative">
-          <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-500" />
+          <Search className="absolute left-3.5 top-3.5 w-4 h-4 text-slate-500 pointer-events-none" />
           <input type="text" value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search solver or university..."
-            className="form-input pl-10" />
+            className="form-input !pl-11" />
         </div>
       </div>
 
