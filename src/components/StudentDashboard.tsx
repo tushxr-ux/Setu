@@ -125,7 +125,7 @@ export const StudentDashboard: React.FC = () => {
                     <h3 className="text-sm font-bold text-slate-900 line-clamp-1">{sub.challengeTitle}</h3>
                     <div className="text-xs text-slate-600 font-medium mt-0.5">Team: {sub.teamName} • {sub.memberCount} member{sub.memberCount > 1 ? 's' : ''}</div>
                   </div>
-                  <div className="flex items-center gap-3 pt-3 md:pt-0 border-t md:border-t-0 border-slate-100 shrink-0">
+                  <div className="flex items-center justify-between md:justify-end gap-3 pt-3 md:pt-0 border-t md:border-t-0 border-slate-100 shrink-0">
                     <div className="text-right">
                       <div className="text-[11px] text-slate-600 font-bold uppercase">Originality</div>
                       <div className={`text-xs font-mono font-bold ${sub.plagiarismFlagged ? 'text-red-600' : 'text-green-600'}`}>

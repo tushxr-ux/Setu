@@ -11,6 +11,7 @@ import { OrgDashboard } from './components/OrgDashboard';
 import { LeaderboardView } from './components/LeaderboardView';
 import { HirePipelineView } from './components/HirePipelineView';
 import { AdminPortal } from './components/AdminPortal';
+import { MobileBottomNav } from './components/MobileBottomNav';
 import { CheckCircle, X, Info, AlertTriangle } from 'lucide-react';
 
 const Toast: React.FC<{ message: string; type: 'success' | 'info' | 'warning'; onClose: () => void }> = ({
@@ -28,7 +29,7 @@ const Toast: React.FC<{ message: string; type: 'success' | 'info' | 'warning'; o
   };
 
   return (
-    <div className={`fixed bottom-6 right-5 z-[100] flex items-center space-x-3 border rounded-2xl px-4 py-3 max-w-sm animate-fade-up ${styles[type]}`}>
+    <div className={`fixed bottom-20 md:bottom-6 right-4 left-4 sm:left-auto sm:right-5 z-[100] flex items-center space-x-3 border rounded-2xl px-4 py-3 max-w-sm animate-fade-up ${styles[type]}`}>
       {icons[type]}
       <span className="text-sm text-slate-800 font-medium">{message}</span>
       <button onClick={onClose} className="ml-1 text-slate-400 hover:text-slate-600"><X className="w-4 h-4" /></button>
@@ -38,7 +39,7 @@ const Toast: React.FC<{ message: string; type: 'success' | 'info' | 'warning'; o
 
 export default function App() {
   const {
-    role, activeTab, challenges, selectedChallenge, setSelectedChallenge,
+    role, activeTab, setActiveTab, challenges, selectedChallenge, setSelectedChallenge,
     isPostModalOpen, isSubmitModalOpen, setIsSubmitModalOpen,
     toastMessage, toastType, showToast,
   } = useApp();
@@ -64,7 +65,7 @@ export default function App() {
   const isExplore = activeTab === 'explore';
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans">
+    <div className="min-h-screen bg-slate-50 font-sans pb-20 md:pb-0">
       <Navbar />
 
       {/* Challenge Feed */}
@@ -175,20 +176,77 @@ export default function App() {
 
       {/* Footer */}
       <footer className="mt-16 border-t border-slate-200 bg-white py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-600 font-medium">
-          <div>
-            <span className="font-extrabold text-slate-900 text-sm">Setu</span>
-            <span className="ml-1.5 text-slate-600">— Bridging Civic Problems to Student Solutions</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+              <span className="font-extrabold text-slate-900 text-sm">Setu</span>
+              <span className="ml-1.5 text-slate-600">— Bridging Civic Problems to Student Solutions</span>
+            </div>
+
+            {/* Footer Navigation: Challenges, Leaders, Inbox, Talent */}
+            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-xs font-semibold">
+              <button
+                onClick={() => { setActiveTab('explore'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className={`px-3 py-1.5 rounded-xl transition-colors ${activeTab === 'explore' ? 'bg-blue-50 text-blue-700 font-bold' : 'text-slate-600 hover:text-blue-700 hover:bg-slate-50'}`}
+              >
+                Challenges
+              </button>
+              <button
+                onClick={() => { setActiveTab('leaderboard'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className={`px-3 py-1.5 rounded-xl transition-colors ${activeTab === 'leaderboard' ? 'bg-blue-50 text-blue-700 font-bold' : 'text-slate-600 hover:text-blue-700 hover:bg-slate-50'}`}
+              >
+                Leaders
+              </button>
+              {role === 'student' && (
+                <button
+                  onClick={() => { setActiveTab('student-dash'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  className={`px-3 py-1.5 rounded-xl transition-colors ${activeTab === 'student-dash' ? 'bg-blue-50 text-blue-700 font-bold' : 'text-slate-600 hover:text-blue-700 hover:bg-slate-50'}`}
+                >
+                  My Work
+                </button>
+              )}
+              {(role === 'company' || role === 'government') && (
+                <>
+                  <button
+                    onClick={() => { setActiveTab('org-dashboard'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className={`px-3 py-1.5 rounded-xl transition-colors ${activeTab === 'org-dashboard' ? 'bg-blue-50 text-blue-700 font-bold' : 'text-slate-600 hover:text-blue-700 hover:bg-slate-50'}`}
+                  >
+                    Inbox
+                  </button>
+                  <button
+                    onClick={() => { setActiveTab('hire-pipeline'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className={`px-3 py-1.5 rounded-xl transition-colors ${activeTab === 'hire-pipeline' ? 'bg-blue-50 text-blue-700 font-bold' : 'text-slate-600 hover:text-blue-700 hover:bg-slate-50'}`}
+                  >
+                    Talent
+                  </button>
+                </>
+              )}
+              {role === 'admin' && (
+                <button
+                  onClick={() => { setActiveTab('admin-portal'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  className={`px-3 py-1.5 rounded-xl transition-colors ${activeTab === 'admin-portal' ? 'bg-blue-50 text-blue-700 font-bold' : 'text-slate-600 hover:text-blue-700 hover:bg-slate-50'}`}
+                >
+                  Admin
+                </button>
+              )}
+            </div>
           </div>
-          <div className="flex items-center space-x-4">
-            <span className="font-semibold text-slate-700">SIH 2026 · PS26043</span>
-            <span>·</span>
-            <span>Built with ❤️ for India</span>
-            <span>·</span>
-            <span className="text-blue-700 font-bold">100% Escrow-Backed</span>
+
+          <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 font-medium">
+            <div className="flex items-center space-x-3">
+              <span className="font-semibold text-slate-700">SIH 2026 · PS26043</span>
+              <span>·</span>
+              <span>Built with ❤️ for India</span>
+            </div>
+            <div className="text-blue-700 font-bold">
+              100% Escrow-Backed Rewards
+            </div>
           </div>
         </div>
       </footer>
+
+      {/* Modern Fixed Bottom Navigation Bar for Mobile */}
+      <MobileBottomNav />
     </div>
   );
 }

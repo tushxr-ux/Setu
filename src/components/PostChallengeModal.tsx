@@ -50,12 +50,12 @@ export const PostChallengeModal: React.FC = () => {
 
   return (
     <div className="modal-overlay" onClick={() => setIsPostModalOpen(false)}>
-      <div className="modal-panel max-w-3xl w-full my-6" onClick={e => e.stopPropagation()}>
+      <div className="modal-panel max-w-3xl w-full my-auto sm:my-6 rounded-2xl sm:rounded-3xl" onClick={e => e.stopPropagation()}>
 
         {/* Header */}
-        <div className="px-6 py-5 border-b border-slate-100 bg-slate-50/80 flex items-center justify-between">
+        <div className="px-4 py-4 sm:px-6 sm:py-5 border-b border-slate-100 bg-slate-50/80 flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-extrabold text-slate-900">Post a Challenge</h2>
+            <h2 className="text-base sm:text-lg font-extrabold text-slate-900">Post a Challenge</h2>
             <p className="text-xs text-slate-500 mt-0.5">Reward is escrowed before any team starts — guaranteed payout on acceptance.</p>
           </div>
           <button onClick={() => setIsPostModalOpen(false)} className="p-2 rounded-xl text-slate-400 hover:bg-slate-100">
@@ -63,24 +63,24 @@ export const PostChallengeModal: React.FC = () => {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-5 max-h-[75vh] overflow-y-auto">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 sm:space-y-5 max-h-[75vh] overflow-y-auto">
 
           {/* Track toggle */}
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Challenge Track</label>
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3">
               {(['Public', 'Private'] as const).map(t => (
                 <button
                   key={t}
                   type="button"
                   onClick={() => setTrack(t)}
-                  className={`flex-1 py-3 rounded-xl border-2 text-sm font-bold transition-all ${
+                  className={`flex-1 py-2.5 sm:py-3 px-3 rounded-xl border-2 text-xs sm:text-sm font-bold transition-all text-center ${
                     track === t
                       ? t === 'Public' ? 'border-blue-700 bg-blue-50 text-blue-800' : 'border-indigo-600 bg-indigo-50 text-indigo-800'
                       : 'border-slate-200 text-slate-500 hover:border-slate-300'
                   }`}
                 >
-                  {t === 'Public' ? '🏛 Government / NGO (Free listing)' : '🏢 Private Sector (7% success fee)'}
+                  {t === 'Public' ? '🏛 Govt / NGO (Free listing)' : '🏢 Private Sector (7% fee)'}
                 </button>
               ))}
             </div>
@@ -172,7 +172,7 @@ export const PostChallengeModal: React.FC = () => {
           </div>
 
           {/* Location */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Location Scope</label>
               <select value={locationScope} onChange={e => setLocationScope(e.target.value as any)} className="form-select">
@@ -244,12 +244,13 @@ export const PostChallengeModal: React.FC = () => {
           </div>
 
           {/* Submit */}
-          <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <button type="button" onClick={() => setIsPostModalOpen(false)} className="btn-ghost">Cancel</button>
+          <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <button type="button" onClick={() => setIsPostModalOpen(false)} className="btn-ghost text-xs sm:text-sm">Cancel</button>
             <button type="submit" disabled={isSubmitting}
-              className="btn-primary text-sm disabled:opacity-50">
-              <Lock className="w-4 h-4" />
-              <span>{isSubmitting ? 'Funding Escrow...' : `Fund Escrow & Post (₹${rewardAmount.toLocaleString('en-IN')})`}</span>
+              className="btn-primary text-xs sm:text-sm py-2 px-3 sm:px-4 disabled:opacity-50">
+              <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+              <span className="hidden sm:inline">{isSubmitting ? 'Funding Escrow...' : `Fund Escrow & Post (₹${rewardAmount.toLocaleString('en-IN')})`}</span>
+              <span className="sm:hidden">{isSubmitting ? 'Funding...' : `Post (₹${rewardAmount.toLocaleString('en-IN')})`}</span>
             </button>
           </div>
 

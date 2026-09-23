@@ -6,6 +6,7 @@ import { Github, Video, ExternalLink, CheckCircle2, XCircle, UserCheck, ShieldCh
 export const OrgDashboard: React.FC = () => {
   const { currentUser, challenges, submissions, reviewSubmission, markHireInterested, setIsPostModalOpen } = useApp();
   const [selectedSubId, setSelectedSubId] = useState<string>(submissions[0]?.id || '');
+  const [mobileTab, setMobileTab] = useState<'list' | 'detail'>('list');
   const [rejectFeedback, setRejectFeedback] = useState('');
   const [isRejecting, setIsRejecting] = useState(false);
   const [isHireOpen, setIsHireOpen] = useState(false);
@@ -27,30 +28,30 @@ export const OrgDashboard: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
       {/* Org Stats Card */}
-      <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-card flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-card flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="flex items-center space-x-4">
-          <div className="w-14 h-14 rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden border border-slate-200 shadow-sm shrink-0">
             <img src={currentUser.orgLogo || currentUser.avatar} alt={currentUser.orgName} className="w-full h-full object-cover" />
           </div>
           <div>
             <div className="flex items-center space-x-2 flex-wrap gap-1">
-              <h1 className="text-xl font-extrabold text-slate-900">{currentUser.orgName || currentUser.name}</h1>
+              <h1 className="text-lg sm:text-xl font-extrabold text-slate-900">{currentUser.orgName || currentUser.name}</h1>
               <span className="badge badge-blue">Verified Organisation</span>
             </div>
             <p className="text-xs text-slate-600 font-medium mt-0.5">{currentUser.name} • {currentUser.orgDomain || currentUser.email}</p>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-center min-w-[120px]">
-            <div className="text-xs text-slate-600 font-bold uppercase tracking-wider">Active Challenges</div>
-            <div className="text-xl font-extrabold text-blue-700 mt-0.5">{orgChallenges.length}</div>
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-3">
+          <div className="px-3.5 py-2.5 sm:px-4 sm:py-3 bg-slate-50 border border-slate-200 rounded-2xl text-center sm:min-w-[120px]">
+            <div className="text-[11px] sm:text-xs text-slate-600 font-bold uppercase tracking-wider">Active Challenges</div>
+            <div className="text-lg sm:text-xl font-extrabold text-blue-700 mt-0.5">{orgChallenges.length}</div>
           </div>
-          <div className="px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-center min-w-[120px]">
-            <div className="text-xs text-slate-600 font-bold uppercase tracking-wider">Pending Review</div>
-            <div className="text-xl font-extrabold text-amber-600 mt-0.5">{orgSubmissions.filter(s => s.status === 'Pending Review').length}</div>
+          <div className="px-3.5 py-2.5 sm:px-4 sm:py-3 bg-slate-50 border border-slate-200 rounded-2xl text-center sm:min-w-[120px]">
+            <div className="text-[11px] sm:text-xs text-slate-600 font-bold uppercase tracking-wider">Pending Review</div>
+            <div className="text-lg sm:text-xl font-extrabold text-amber-600 mt-0.5">{orgSubmissions.filter(s => s.status === 'Pending Review').length}</div>
           </div>
-          <button onClick={() => setIsPostModalOpen(true)} className="btn-primary">+ Post Challenge</button>
+          <button onClick={() => setIsPostModalOpen(true)} className="col-span-2 sm:col-span-1 btn-primary text-xs sm:text-sm py-2.5 sm:py-2.5 justify-center">+ Post Challenge</button>
         </div>
       </div>
 
@@ -61,6 +62,32 @@ export const OrgDashboard: React.FC = () => {
           <p className="text-xs text-slate-600 font-medium mt-0.5">Review team solutions, run originality checks, accept with escrow release, or mark teams for hiring.</p>
         </div>
 
+        {/* Mobile View Switcher */}
+        {orgSubmissions.length > 0 && (
+          <div className="lg:hidden flex items-center bg-slate-100 border border-slate-200 rounded-2xl p-1 mb-4">
+            <button
+              onClick={() => setMobileTab('list')}
+              className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all ${
+                mobileTab === 'list'
+                  ? 'bg-white text-blue-700 shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Submissions ({orgSubmissions.length})
+            </button>
+            <button
+              onClick={() => setMobileTab('detail')}
+              className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all ${
+                mobileTab === 'detail'
+                  ? 'bg-white text-blue-700 shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Review Details
+            </button>
+          </div>
+        )}
+
         {orgSubmissions.length === 0 ? (
           <div className="py-16 text-center bg-slate-50 rounded-2xl border border-slate-200">
             <p className="text-slate-600 text-sm font-medium">No submissions yet for your active challenges.</p>
@@ -69,11 +96,14 @@ export const OrgDashboard: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
             {/* Left: Submission List */}
-            <div className="lg:col-span-5 space-y-2">
+            <div className={`lg:col-span-5 space-y-2 ${mobileTab === 'detail' ? 'hidden lg:block' : 'block'}`}>
               {orgSubmissions.map(sub => (
                 <div
                   key={sub.id}
-                  onClick={() => setSelectedSubId(sub.id)}
+                  onClick={() => {
+                    setSelectedSubId(sub.id);
+                    setMobileTab('detail');
+                  }}
                   className={`p-4 rounded-2xl border cursor-pointer transition-all ${
                     activeSub?.id === sub.id
                       ? 'border-blue-500 bg-blue-50/80 shadow-blue-sm'
@@ -107,10 +137,21 @@ export const OrgDashboard: React.FC = () => {
 
             {/* Right: Detail Panel */}
             {activeSub && (
-              <div className="lg:col-span-7 bg-white border border-slate-200 rounded-3xl shadow-card overflow-hidden">
+              <div className={`lg:col-span-7 bg-white border border-slate-200 rounded-3xl shadow-card overflow-hidden ${mobileTab === 'list' ? 'hidden lg:block' : 'block'}`}>
+
+                {/* Mobile Back Header */}
+                <div className="lg:hidden px-4 py-2.5 bg-blue-50/80 border-b border-blue-100 flex items-center justify-between">
+                  <button
+                    onClick={() => setMobileTab('list')}
+                    className="text-xs text-blue-700 font-bold flex items-center space-x-1"
+                  >
+                    <span>← Back to Submissions</span>
+                  </button>
+                  <span className="text-[11px] text-slate-600 font-semibold">{activeSub.teamName}</span>
+                </div>
 
                 {/* Panel Header */}
-                <div className="p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+                <div className="p-4 sm:p-5 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50">
                   <div className="flex items-center space-x-3">
                     <img src={activeSub.leadStudentAvatar} alt={activeSub.leadStudentName} className="w-10 h-10 rounded-xl object-cover border border-slate-200" />
                     <div>
@@ -189,23 +230,24 @@ export const OrgDashboard: React.FC = () => {
 
                 {/* Actions */}
                 {activeSub.status === 'Pending Review' && (
-                  <div className="px-5 pb-5 flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100">
+                  <div className="px-4 sm:px-5 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-4 border-t border-slate-100">
                     <button
                       onClick={() => setIsHireOpen(true)}
-                      className="btn-secondary text-xs"
+                      className="btn-secondary text-xs w-full sm:w-auto justify-center"
                     >
                       <UserCheck className="w-4 h-4 text-teal-600" />
                       <span>Add to Hiring Pipeline</span>
                     </button>
 
-                    <div className="flex items-center space-x-2">
-                      <button onClick={() => setIsRejecting(true)} className="px-3 py-2 rounded-xl text-xs font-semibold text-red-600 bg-red-50 border border-red-200 hover:bg-red-100 transition-colors flex items-center space-x-1.5">
+                    <div className="flex items-center space-x-2 w-full sm:w-auto">
+                      <button onClick={() => setIsRejecting(true)} className="flex-1 sm:flex-initial px-3 py-2 rounded-xl text-xs font-semibold text-red-600 bg-red-50 border border-red-200 hover:bg-red-100 transition-colors flex items-center justify-center space-x-1.5">
                         <XCircle className="w-4 h-4" /><span>Reject</span>
                       </button>
                       <button onClick={() => reviewSubmission(activeSub.id, 'Accepted')}
-                        className="btn-primary text-xs">
+                        className="flex-1 sm:flex-initial btn-primary text-xs justify-center">
                         <Coins className="w-4 h-4" />
-                        <span>Accept & Release Escrow</span>
+                        <span className="hidden sm:inline">Accept & Release Escrow</span>
+                        <span className="sm:hidden">Accept & Release</span>
                       </button>
                     </div>
                   </div>

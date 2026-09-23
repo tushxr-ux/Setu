@@ -24,16 +24,16 @@ export const ChallengeDetailModal: React.FC<ChallengeDetailModalProps> = ({ chal
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-panel max-w-4xl w-full my-6" onClick={e => e.stopPropagation()}>
+      <div className="modal-panel max-w-4xl w-full my-auto sm:my-6 rounded-2xl sm:rounded-3xl" onClick={e => e.stopPropagation()}>
 
         {/* Header */}
-        <div className="px-6 py-5 border-b border-slate-100 bg-slate-50/80 flex items-start justify-between gap-4">
-          <div className="flex items-start space-x-4">
-            <div className="w-12 h-12 rounded-2xl overflow-hidden border border-slate-200 shadow-sm shrink-0">
+        <div className="px-4 py-4 sm:px-6 sm:py-5 border-b border-slate-100 bg-slate-50/80 flex items-start justify-between gap-3 sm:gap-4">
+          <div className="flex items-start space-x-3 sm:space-x-4">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl overflow-hidden border border-slate-200 shadow-sm shrink-0">
               <img src={ch.posterLogo} alt={ch.posterName} className="w-full h-full object-cover" />
             </div>
             <div>
-              <div className="flex flex-wrap items-center gap-2 mb-1">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1">
                 <span className="flex items-center space-x-1 text-xs text-slate-700 font-semibold">
                   <PosterIcon className="w-3.5 h-3.5" />
                   <span>{ch.posterName}</span>
@@ -41,14 +41,14 @@ export const ChallengeDetailModal: React.FC<ChallengeDetailModalProps> = ({ chal
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
                   ch.track === 'Public' ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-indigo-50 text-indigo-700 border-indigo-200'
                 }`}>
-                  {ch.track === 'Public' ? '🏛 Government / NGO' : '🏢 Private Sector'}
+                  {ch.track === 'Public' ? '🏛 Govt' : '🏢 Private'}
                 </span>
                 <span className="text-xs text-slate-600 font-medium flex items-center space-x-1">
                   <Clock className="w-3.5 h-3.5" />
-                  <span>{daysLeft > 0 ? `${daysLeft} days left` : 'Deadline passed'}</span>
+                  <span>{daysLeft > 0 ? `${daysLeft}d left` : 'Expired'}</span>
                 </span>
               </div>
-              <h2 className="text-xl font-extrabold text-slate-900 leading-snug">{ch.title}</h2>
+              <h2 className="text-base sm:text-xl font-extrabold text-slate-900 leading-snug">{ch.title}</h2>
             </div>
           </div>
           <button onClick={onClose} className="p-2 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors shrink-0">
@@ -57,7 +57,7 @@ export const ChallengeDetailModal: React.FC<ChallengeDetailModalProps> = ({ chal
         </div>
 
         {/* Body */}
-        <div className="p-6 space-y-6 max-h-[72vh] overflow-y-auto">
+        <div className="p-4 sm:p-6 space-y-5 sm:space-y-6 max-h-[72vh] overflow-y-auto">
 
           {/* Escrow & Reward Box */}
           <div className="p-5 rounded-2xl bg-gradient-to-r from-blue-700 to-blue-800 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -193,14 +193,15 @@ export const ChallengeDetailModal: React.FC<ChallengeDetailModalProps> = ({ chal
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-slate-100 bg-slate-50/80 flex items-center justify-between">
-          <button onClick={onClose} className="btn-ghost text-sm">Close</button>
+        <div className="px-4 py-3 sm:px-6 sm:py-4 border-t border-slate-100 bg-slate-50/80 flex items-center justify-between gap-2">
+          <button onClick={onClose} className="btn-ghost text-xs sm:text-sm">Close</button>
           {ch.status === 'Open' && role === 'student' ? (
             <button
               onClick={() => { onClose(); onOpenSubmit(); }}
-              className="btn-primary text-sm"
+              className="btn-primary text-xs sm:text-sm py-2 px-3 sm:px-4"
             >
-              <span>Apply to Solve — ₹{winnerPayout.toLocaleString('en-IN')} winner payout</span>
+              <span className="hidden sm:inline">Apply to Solve — ₹{winnerPayout.toLocaleString('en-IN')} winner payout</span>
+              <span className="sm:hidden">Apply (₹{winnerPayout.toLocaleString('en-IN')})</span>
             </button>
           ) : ch.status !== 'Open' ? (
             <span className="text-xs text-slate-400 font-mono">Challenge {ch.status}</span>

@@ -46,13 +46,13 @@ export const SubmitSolutionModal: React.FC<SubmitSolutionModalProps> = ({ challe
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-panel max-w-2xl w-full my-6" onClick={e => e.stopPropagation()}>
+      <div className="modal-panel max-w-2xl w-full my-auto sm:my-6 rounded-2xl sm:rounded-3xl" onClick={e => e.stopPropagation()}>
 
         {/* Header */}
-        <div className="px-6 py-5 border-b border-slate-100 bg-gradient-to-r from-blue-700 to-blue-800 text-white flex items-start justify-between">
+        <div className="px-4 py-4 sm:px-6 sm:py-5 border-b border-slate-100 bg-gradient-to-r from-blue-700 to-blue-800 text-white flex items-start justify-between gap-3">
           <div>
             <div className="text-xs text-blue-200">Submitting solution for</div>
-            <h2 className="text-base font-bold text-white mt-0.5 line-clamp-2">{ch.title}</h2>
+            <h2 className="text-sm sm:text-base font-bold text-white mt-0.5 line-clamp-2">{ch.title}</h2>
             <div className="text-xs text-sky-200 mt-1 font-mono">
               Winner payout: ₹{winnerPayout.toLocaleString('en-IN')} | Others share: ₹{Math.round(ch.rewardAmount * 0.3).toLocaleString('en-IN')}
             </div>
@@ -62,10 +62,10 @@ export const SubmitSolutionModal: React.FC<SubmitSolutionModalProps> = ({ challe
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-5 max-h-[72vh] overflow-y-auto">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 sm:space-y-5 max-h-[72vh] overflow-y-auto">
 
           {/* Team Info */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Team Name *</label>
               <input type="text" required value={teamName} onChange={e => setTeamName(e.target.value)}
@@ -152,10 +152,11 @@ export const SubmitSolutionModal: React.FC<SubmitSolutionModalProps> = ({ challe
           </div>
 
           {/* Footer */}
-          <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <button type="button" onClick={onClose} className="btn-ghost">Cancel</button>
-            <button type="submit" disabled={isSubmitting} className="btn-primary text-sm disabled:opacity-50">
-              {isSubmitting ? 'Uploading...' : `Submit Solution for ₹${winnerPayout.toLocaleString('en-IN')}`}
+          <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <button type="button" onClick={onClose} className="btn-ghost text-xs sm:text-sm">Cancel</button>
+            <button type="submit" disabled={isSubmitting} className="btn-primary text-xs sm:text-sm py-2 px-3 sm:px-4 disabled:opacity-50">
+              <span className="hidden sm:inline">{isSubmitting ? 'Uploading...' : `Submit Solution for ₹${winnerPayout.toLocaleString('en-IN')}`}</span>
+              <span className="sm:hidden">{isSubmitting ? 'Uploading...' : `Submit (₹${winnerPayout.toLocaleString('en-IN')})`}</span>
             </button>
           </div>
 

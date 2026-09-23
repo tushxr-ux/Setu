@@ -28,9 +28,10 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
 
           {/* Top eyebrow */}
           <div className="flex justify-center mb-5">
-            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/15 border border-white/25 text-white text-xs font-semibold backdrop-blur-sm">
-              <ShieldCheck className="w-4 h-4 text-sky-300" />
-              <span>100% Escrow-Backed Rewards — Money locked before any team starts work</span>
+            <div className="inline-flex items-center space-x-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/15 border border-white/25 text-white text-xs font-semibold backdrop-blur-sm text-center">
+              <ShieldCheck className="w-4 h-4 text-sky-300 shrink-0" />
+              <span className="hidden sm:inline">100% Escrow-Backed Rewards — Money locked before any team starts work</span>
+              <span className="sm:hidden">100% Escrow-Backed · Guaranteed Payouts</span>
             </div>
           </div>
 
@@ -79,32 +80,34 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                 type="text"
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                placeholder="Search challenges by keyword, sector, skill (e.g. pothole, PWA, WhatsApp bot)..."
-                className="form-input !pl-11"
+                placeholder="Search challenges by keyword, sector, skill..."
+                className="form-input !pl-11 text-xs sm:text-sm"
               />
             </div>
 
-            <select
-              value={selectedDifficulty}
-              onChange={e => setSelectedDifficulty(e.target.value)}
-              className="form-select sm:w-44 font-medium"
-            >
-              <option value="All">All Levels</option>
-              <option value="Beginner">Beginner</option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Advanced">Advanced</option>
-              <option value="Expert">Expert</option>
-            </select>
+            <div className="grid grid-cols-2 sm:flex gap-2 sm:gap-2.5">
+              <select
+                value={selectedDifficulty}
+                onChange={e => setSelectedDifficulty(e.target.value)}
+                className="form-select w-full sm:w-44 font-medium text-xs sm:text-sm"
+              >
+                <option value="All">All Levels</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+                <option value="Expert">Expert</option>
+              </select>
 
-            <select
-              value={selectedTrack}
-              onChange={e => setSelectedTrack(e.target.value)}
-              className="form-select sm:w-56 font-medium"
-            >
-              <option value="All">All Tracks</option>
-              <option value="Public">🏛 Government / NGO (Free)</option>
-              <option value="Private">🏢 Private Sector (Cash)</option>
-            </select>
+              <select
+                value={selectedTrack}
+                onChange={e => setSelectedTrack(e.target.value)}
+                className="form-select w-full sm:w-56 font-medium text-xs sm:text-sm"
+              >
+                <option value="All">All Tracks</option>
+                <option value="Public">🏛 Gov / NGO</option>
+                <option value="Private">🏢 Private Sector</option>
+              </select>
+            </div>
           </div>
 
           {/* Sector Tag Chips */}
